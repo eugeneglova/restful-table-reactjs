@@ -1,0 +1,11 @@
+{
+  "name": "restful-table-reactjs",
+  "version": "1.0.0",
+  "description": "Table on ReactJS with using data from RESTful API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eugene Glova",
+  "license": "ISC"
+}
