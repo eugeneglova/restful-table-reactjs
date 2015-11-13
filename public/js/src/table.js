@@ -14,6 +14,12 @@ function addItem(component, item) {
     });
 }
 
+function removeItem(component, id) {
+    return request({ method: "DELETE", url: "/api/v1/items/" + id }, (error, response, body) => {
+        fetchItemsFromPage(component, 1);
+    });
+}
+
 export default React.createClass({
     getInitialState: function() {
         return {
@@ -35,7 +41,9 @@ export default React.createClass({
         });
     },
     handleItemRemove: function(id) {
+        var self = this;
         return function(e) {
+            removeItem(self, id);
         };
     },
     handlePageClick: function(page) {
