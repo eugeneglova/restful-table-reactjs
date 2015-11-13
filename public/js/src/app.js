@@ -1,8 +1,8 @@
 import React from "react";
-import Greeting from "./greeting";
+import Table from "./table";
 
 React.render(
-  <Greeting name="World"/>,
+  <Table/>,
   document.body
 );
 
