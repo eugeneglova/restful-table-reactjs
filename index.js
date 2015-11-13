@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 var items = [];
 
-for (var i = 0; i < 8; i++) {
+for (var i = 0; i < 10; i++) {
     items.push({
         id: "id " + i,
         name: "name " + i,
