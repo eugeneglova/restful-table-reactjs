@@ -52,10 +52,17 @@ export default React.createClass({
         }
 
         return (
-            <div>
-                <a onClick={this.handleAddItemClick}>Add new item</a>
-                <table>
+            <div class="container">
+                <button type="button" className="btn btn-primary" onClick={this.handleAddItemClick}>Add new item</button>
+                <table className="table table-hover">
                     <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
                         {this.state.items.map(item => (<TableRow item={item} onClickRemove={this.handleItemRemove}/>))}
                     </tbody>
                 </table>

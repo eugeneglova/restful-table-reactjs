@@ -12,15 +12,15 @@ export default React.createClass({
 
         return (
             <div>
-                Pages:
+                <p>Pages:</p>
                 {_.times(this.props.paging.pages, (page) => {
                     if (this.props.paging.page === page + 1) {
                         return (
-                            <strong>{page + 1}</strong>
+                            <button className="btn btn-default active">{page + 1}</button>
                         );
                     } else {
                         return (
-                            <button onClick={this.handlePageClick(page + 1)}>{page + 1}</button>
+                            <button className="btn btn-default" onClick={this.handlePageClick(page + 1)}>{page + 1}</button>
                         );
                     }
                 })}

@@ -24,7 +24,7 @@ export default React.createClass({
                     {item.description}
                 </td>
                 <td>
-                    <a onClick={this.handleItemRemove(item)}>Remove</a>
+                    <button type="button" className="btn btn-danger btn-xs" onClick={this.handleItemRemove(item)}>Remove</button>
                 </td>
             </tr>
         );
