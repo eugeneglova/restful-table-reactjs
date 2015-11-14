@@ -2,6 +2,7 @@ import React from "react";
 import request from "browser-request";
 import _ from "underscore";
 import Paging from "./paging";
+import AddForm from "./add-form";
 
 function fetchItemsFromPage(component, page) {
     return request({ url: "/api/v1/items", qs: { page }, json: true }, (error, response, body) => {
@@ -32,14 +33,11 @@ export default React.createClass({
     componentDidMount: function() {
         fetchItemsFromPage(this, 1);
     },
-    handleItemAdd: function() {
+    handleAddItemClick: function() {
         this.setState({ step: "add-item" });
     },
-    handleAddButtonClick: function() {
-        addItem(this, {
-            id: this.refs.id.value,
-            name: this.refs.name.value
-        });
+    handleAddingNewItem: function(item) {
+        addItem(this, item);
     },
     handleItemRemove: function(id) {
         var self = this;
@@ -52,17 +50,12 @@ export default React.createClass({
     },
     render: function() {
         if (this.state.step === "add-item") {
-            return (
-                <div>
-                    <input name="id" ref="id" />
-                    <input name="name" ref="name" />
-                    <input type="button" onClick={this.handleAddButtonClick} />
-                </div>
-            );
+            return <AddForm onSubmit={this.handleAddingNewItem} />;
         }
+
         return (
             <div>
-                <a onClick={this.handleItemAdd}>Add new item</a>
+                <a onClick={this.handleAddItemClick}>Add new item</a>
                 <table>
                     <tbody>
                     {
