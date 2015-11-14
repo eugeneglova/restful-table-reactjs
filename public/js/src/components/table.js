@@ -1,6 +1,7 @@
 import React from "react";
 import request from "browser-request";
 import _ from "underscore";
+import Paging from "./paging";
 
 function fetchItemsFromPage(component, page) {
     return request({ url: "/api/v1/items", qs: { page }, json: true }, (error, response, body) => {
@@ -47,10 +48,7 @@ export default React.createClass({
         };
     },
     handlePageClick: function(page) {
-        var self = this;
-        return function(e) {
-            fetchItemsFromPage(self, page);
-        };
+        fetchItemsFromPage(this, page);
     },
     render: function() {
         if (this.state.step === "add-item") {
@@ -90,25 +88,7 @@ export default React.createClass({
                     }
                     </tbody>
                 </table>
-                {(() => {
-                    if (this.state.paging.pages > 0) {
-                        return (
-                            <div>
-                                {_.times(this.state.paging.pages, (page) => {
-                                    if (this.state.paging.page === page + 1) {
-                                        return (
-                                            <b>{page + 1}</b>
-                                        );
-                                    } else {
-                                        return (
-                                            <a href="javascript:void(0);" onClick={this.handlePageClick(page + 1)}>{page + 1}</a>
-                                        );
-                                    }
-                                })}
-                            </div>
-                        );
-                    }
-                })()}
+                <Paging paging={this.state.paging} onPageClick={this.handlePageClick} />
             </div>
         );
     }
