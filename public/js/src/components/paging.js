@@ -12,14 +12,15 @@ export default React.createClass({
 
         return (
             <div>
+                Pages:
                 {_.times(this.props.paging.pages, (page) => {
                     if (this.props.paging.page === page + 1) {
                         return (
-                            <b>{page + 1}</b>
+                            <strong>{page + 1}</strong>
                         );
                     } else {
                         return (
-                            <a href="javascript:void(0);" onClick={this.handlePageClick(page + 1)}>{page + 1}</a>
+                            <button onClick={this.handlePageClick(page + 1)}>{page + 1}</button>
                         );
                     }
                 })}
