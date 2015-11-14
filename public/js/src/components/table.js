@@ -3,6 +3,7 @@ import request from "browser-request";
 import _ from "underscore";
 import Paging from "./paging";
 import AddForm from "./add-form";
+import TableRow from "./table-row";
 
 function fetchItemsFromPage(component, page) {
     return request({ url: "/api/v1/items", qs: { page }, json: true }, (error, response, body) => {
@@ -16,8 +17,8 @@ function addItem(component, item) {
     });
 }
 
-function removeItem(component, id) {
-    return request({ method: "DELETE", url: "/api/v1/items/" + id }, (error, response, body) => {
+function removeItem(component, item) {
+    return request({ method: "DELETE", url: "/api/v1/items/" + item.id }, (error, response, body) => {
         fetchItemsFromPage(component, 1);
     });
 }
@@ -39,11 +40,8 @@ export default React.createClass({
     handleAddingNewItem: function(item) {
         addItem(this, item);
     },
-    handleItemRemove: function(id) {
-        var self = this;
-        return function(e) {
-            removeItem(self, id);
-        };
+    handleItemRemove: function(item) {
+        removeItem(this, item);
     },
     handlePageClick: function(page) {
         fetchItemsFromPage(this, page);
@@ -58,27 +56,7 @@ export default React.createClass({
                 <a onClick={this.handleAddItemClick}>Add new item</a>
                 <table>
                     <tbody>
-                    {
-                        this.state.items.map(item => (
-                            <tr>
-                                <td>
-                                    {item.id}
-                                </td>
-                                <td>
-                                    {item.name}
-                                </td>
-                                <td>
-                                    {item.title}
-                                </td>
-                                <td>
-                                    {item.description}
-                                </td>
-                                <td>
-                                    <a onClick={this.handleItemRemove(item.id)}>Remove</a>
-                                </td>
-                            </tr>
-                        ))
-                    }
+                        {this.state.items.map(item => (<TableRow item={item} onClickRemove={this.handleItemRemove}/>))}
                     </tbody>
                 </table>
                 <Paging paging={this.state.paging} onPageClick={this.handlePageClick} />
