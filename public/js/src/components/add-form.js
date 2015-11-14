@@ -12,7 +12,7 @@ export default React.createClass({
             <div>
                 <input name="id" ref="id" />
                 <input name="name" ref="name" />
-                <input type="button" onClick={this.handleButtonClick} />
+                <input type="button" value="Add" onClick={this.handleButtonClick} />
             </div>
         );
     }
